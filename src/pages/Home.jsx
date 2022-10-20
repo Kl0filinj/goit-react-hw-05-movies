@@ -1,6 +1,8 @@
+import Container from 'components/Container';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { getTrendingFilms } from 'services/api';
+import { FilmList, FilmCard, FilmWraper } from './Home.styled';
 // import PropTypes from 'prop-types'
 
 const Home = props => {
@@ -14,21 +16,33 @@ const Home = props => {
     getTrendFilms();
   }, []);
 
-  //   if (filmList.length !== 0) {
-  //     return;
-  //   }
   return (
-    <main>
-      <h1>Populare Films ⬇️</h1>
-      {filmList.map(item => (
-        <li key={item.id}>
-          <Link to={`movies/${item.id}`}>{item.title ?? item.name}</Link>
-        </li>
-      ))}
-    </main>
+    <Container>
+      <main>
+        <h1>Populare Films ⬇️</h1>
+        <FilmList>
+          {filmList.map(item => (
+            <FilmWraper key={item.id}>
+              <FilmCard to={`movies/${item.id}`}>
+                <img
+                  src={
+                    item.backdrop_path
+                      ? `https://image.tmdb.org/t/p/w500/${item.poster_path}`
+                      : 'https://via.placeholder.com/200x100'
+                  }
+                  alt=""
+                  width="200"
+                />
+                <div style={{ maxWidth: '200px', padding: '10px' }}>
+                  <p>{item.title ?? item.name}</p>
+                </div>
+              </FilmCard>
+            </FilmWraper>
+          ))}
+        </FilmList>
+      </main>
+    </Container>
   );
 };
-
-// Home.propTypes = {}
 
 export default Home;

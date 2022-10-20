@@ -1,3 +1,4 @@
+import Container from 'components/Container';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -20,7 +21,23 @@ const MovieDetails = props => {
   if (filmDetails === null) {
     return;
   }
-  return <div>{filmDetails.original_title}</div>;
+  return (
+    <main>
+      <Container>
+        <div style={{ display: 'flex' }}>
+          <img
+            src={
+              filmDetails.backdrop_path
+                ? `https://image.tmdb.org/t/p/w500/${filmDetails.poster_path}`
+                : 'https://via.placeholder.com/500x700'
+            }
+            alt=""
+          />
+          <h1>Film Title: {filmDetails.original_title}</h1>
+        </div>
+      </Container>
+    </main>
+  );
 };
 
 // MovieDetails.propTypes = {}
