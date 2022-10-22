@@ -1,5 +1,6 @@
 import Container from 'components/Container';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import { getTrendingFilms } from 'services/api';
 import { FilmList, FilmCard, FilmWraper } from './Home.styled';
@@ -7,7 +8,7 @@ import { FilmList, FilmCard, FilmWraper } from './Home.styled';
 
 const Home = props => {
   const [filmList, setfilmList] = useState([]);
-
+  const location = useLocation();
   useEffect(() => {
     async function getTrendFilms() {
       const films = await getTrendingFilms();
@@ -23,7 +24,7 @@ const Home = props => {
         <FilmList>
           {filmList.map(item => (
             <FilmWraper key={item.id}>
-              <FilmCard to={`movies/${item.id}`}>
+              <FilmCard to={`movies/${item.id}`} state={{ from: location }}>
                 <img
                   src={
                     item.backdrop_path

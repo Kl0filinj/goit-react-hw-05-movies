@@ -1,14 +1,22 @@
 import Container from 'components/Container';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import { getFilmById } from 'services/api';
 // import PropTypes from 'prop-types'
 
 const MovieDetails = props => {
   const [filmDetails, setfilmDetails] = useState(null);
-  // const [loading, setloading] = useState(false);
+  const location = useLocation();
   const { movieId } = useParams();
+  const backLink = location.state?.from ?? '/';
+
   useEffect(() => {
     async function getFilmDetails() {
       const film = await getFilmById(movieId);
@@ -17,13 +25,13 @@ const MovieDetails = props => {
     getFilmDetails();
   }, [movieId]);
 
-  // if (!loading) {
   if (filmDetails === null) {
     return;
   }
   return (
     <main>
       <Container>
+        <NavLink to={backLink}>Go Back ⬅️</NavLink>
         <div style={{ display: 'flex' }}>
           <img
             src={
@@ -33,8 +41,41 @@ const MovieDetails = props => {
             }
             alt=""
           />
-          <h1>Film Title: {filmDetails.original_title}</h1>
+          <div>
+            <h1>{filmDetails.original_title}</h1>
+            <p>
+              User Score:{' '}
+              {`${Math.floor(Number(filmDetails.vote_average) * 10)}%`}
+            </p>
+            <h2>Overview</h2>
+            <p>{filmDetails.overview}</p>
+            <h2>Geners</h2>
+            <ul>
+              {filmDetails.genres.map(item => (
+                <li key={item.id}>{item.name}</li>
+              ))}
+            </ul>
+          </div>
         </div>
+        <div>
+          <hr />
+          <p>Additonal Information</p>
+          <ul>
+            <li>
+              <Link to={'cast'} state={{ movieId: movieId }}>
+                Cast
+              </Link>
+            </li>
+            <li>
+              <Link to={'reviews'} state={{ movieId: movieId }}>
+                Reviews
+              </Link>
+            </li>
+          </ul>
+
+          <hr />
+        </div>
+        <Outlet />
       </Container>
     </main>
   );
