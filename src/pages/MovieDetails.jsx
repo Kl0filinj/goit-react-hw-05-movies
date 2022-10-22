@@ -2,6 +2,11 @@ import Container from 'components/Container';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import {
+  FilmTitle,
+  FilmDescriptionWrapper,
+  FilmGener,
+} from './MovieDetails.styled';
+import {
   Link,
   NavLink,
   Outlet,
@@ -31,9 +36,11 @@ const MovieDetails = props => {
   return (
     <main>
       <Container>
-        <NavLink to={backLink}>Go Back ⬅️</NavLink>
-        <div style={{ display: 'flex' }}>
+        <NavLink to={backLink}>⬅️ Go Back</NavLink>
+        <FilmDescriptionWrapper>
           <img
+            width="300"
+            height="450"
             src={
               filmDetails.backdrop_path
                 ? `https://image.tmdb.org/t/p/w500/${filmDetails.poster_path}`
@@ -41,22 +48,22 @@ const MovieDetails = props => {
             }
             alt=""
           />
-          <div>
-            <h1>{filmDetails.original_title}</h1>
+          <div style={{ maxWidth: '700px' }}>
+            <FilmTitle>{filmDetails.original_title}</FilmTitle>
             <p>
-              User Score:{' '}
-              {`${Math.floor(Number(filmDetails.vote_average) * 10)}%`}
+              User Rate:
+              <b>{` ${Math.floor(Number(filmDetails.vote_average) * 10)}%`}</b>
             </p>
             <h2>Overview</h2>
             <p>{filmDetails.overview}</p>
             <h2>Geners</h2>
-            <ul>
+            <ul style={{ display: 'flex' }}>
               {filmDetails.genres.map(item => (
-                <li key={item.id}>{item.name}</li>
+                <FilmGener key={item.id}>{item.name}</FilmGener>
               ))}
             </ul>
           </div>
-        </div>
+        </FilmDescriptionWrapper>
         <div>
           <hr />
           <p>Additonal Information</p>

@@ -20,7 +20,7 @@ const Home = props => {
   return (
     <Container>
       <main>
-        <h1>Populare Films ⬇️</h1>
+        <h1>Popular Films ⬇️</h1>
         <FilmList>
           {filmList.map(item => (
             <FilmWraper key={item.id}>

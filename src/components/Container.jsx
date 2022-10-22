@@ -6,6 +6,7 @@ const Container = ({ children }) => {
       style={{
         maxWidth: '100vw',
         padding: '15px',
+        backgroundColor: '#2c2c2c',
       }}
     >
       {children}
