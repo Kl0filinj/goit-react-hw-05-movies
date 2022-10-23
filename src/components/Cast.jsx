@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getFilmCast } from 'services/api';
-// import PropTypes from 'prop-types'
 
 const Cast = props => {
   const [castList, setcastList] = useState([]);
@@ -18,18 +17,18 @@ const Cast = props => {
     <section>
       <div>
         <ul>
-          {castList.map(item => (
-            <li key={item.id}>
+          {castList.map(({ id, profile_path, name, character }) => (
+            <li key={id}>
               <img
                 src={
-                  item.profile_path
-                    ? `https://image.tmdb.org/t/p/w500/${item.profile_path}`
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w500/${profile_path}`
                     : 'https://via.placeholder.com/200x100'
                 }
                 alt=""
               />
-              <p>{item.name}</p>
-              <p>Character: {item.character}</p>
+              <p>{name}</p>
+              <p>Character: {character}</p>
             </li>
           ))}
         </ul>
@@ -37,7 +36,5 @@ const Cast = props => {
     </section>
   );
 };
-
-// Cast.propTypes = {}
 
 export default Cast;

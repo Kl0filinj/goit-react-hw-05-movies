@@ -6,6 +6,7 @@ const Reviews = () => {
   const [reviewList, setreviewList] = useState([]);
   const location = useLocation();
   const movieId = location.state.movieId;
+
   useEffect(() => {
     async function getFilmReviewInfo() {
       const review = await getFilmReview(movieId);
@@ -17,7 +18,17 @@ const Reviews = () => {
     <section>
       <div>
         {reviewList.length !== 0 ? (
-          reviewList.map(item => <p key={item.id}>{item.content}</p>)
+          <ul>
+            {reviewList.map(({ id, author, content }) => (
+              <li key={id}>
+                <p>
+                  <b>{author}</b>
+                </p>
+                <p>{content}</p>
+                <br />
+              </li>
+            ))}
+          </ul>
         ) : (
           <p>No reviews here ^_^</p>
         )}

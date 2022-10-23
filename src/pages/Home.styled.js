@@ -5,7 +5,7 @@ export const FilmList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: base-line;
 `;
 
 export const FilmWraper = styled.li`

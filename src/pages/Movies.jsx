@@ -4,7 +4,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { getFilsByTitle } from 'services/api';
-// import PropTypes from 'prop-types'
 
 const Movies = props => {
   const location = useLocation();
@@ -33,7 +32,7 @@ const Movies = props => {
       setsearchedFilms(films.results);
     }
     getMoviesByTitle();
-    // getFilsByTitle(filmTitle);
+    setfilmQuery(filmTitle);
   }, [filmTitle]);
   return (
     <Container>
@@ -60,7 +59,5 @@ const Movies = props => {
     </Container>
   );
 };
-
-// Movies.propTypes = {}
 
 export default Movies;
