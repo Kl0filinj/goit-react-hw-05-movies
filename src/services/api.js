@@ -40,3 +40,15 @@ export async function getFilmReview(id) {
     return error;
   }
 }
+
+export async function getFilsByTitle(title) {
+  try {
+    const response = await axios.get(
+      `search/movie?api_key=${API_KEY}&query=${title}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
