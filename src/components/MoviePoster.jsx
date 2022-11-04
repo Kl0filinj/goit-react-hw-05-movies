@@ -1,8 +1,8 @@
 import React from 'react';
 import { FilmPoster } from 'pages/Home.styled';
 
-const MoviePoster = ({ src, width, height }) => {
-  return <FilmPoster src={src} alt="" width={width} height={height} />;
+const MoviePoster = ({ src, ...props }) => {
+  return <FilmPoster src={src} alt="" {...props} />;
 };
 
 export default MoviePoster;

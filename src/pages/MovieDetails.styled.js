@@ -11,7 +11,7 @@ export const FilmGener = styled.span`
   border: 1px solid white;
   border-radius: 5px;
   font-size: 14px;
-  margin-left: 5px;
+  margin-right: 5px;
   padding: 4px;
 `;
 

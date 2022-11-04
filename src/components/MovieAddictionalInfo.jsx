@@ -1,33 +1,29 @@
-import { Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { HeaderLink } from './Layout.styled';
 
 const MovieAddictionalInfo = ({ location, movieId }) => {
   return (
     <>
-      <div>
-        <hr />
-        <p>Additonal Information</p>
-        <ul>
-          <li>
-            <Link to={'cast'} state={{ ...location.state, movieId: movieId }}>
-              Cast
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={'reviews'}
-              state={{ ...location.state, movieId: movieId }}
-            >
-              Reviews
-            </Link>
-          </li>
-        </ul>
-        <hr />
-      </div>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Outlet />
-      </Suspense>
+      <h2>Additonal Information</h2>
+      <ul>
+        <li>
+          <HeaderLink
+            to={'cast'}
+            state={{ ...location.state, movieId: movieId }}
+          >
+            Cast
+          </HeaderLink>
+        </li>
+        <li>
+          <HeaderLink
+            to={'reviews'}
+            state={{ ...location.state, movieId: movieId }}
+          >
+            Reviews
+          </HeaderLink>
+        </li>
+      </ul>
     </>
   );
 };

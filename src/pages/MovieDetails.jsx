@@ -27,8 +27,12 @@ const MovieDetails = props => {
     <main>
       <Container>
         <NavLink to={backLink}>⬅️ Go Back</NavLink>
-        <MovieDescription filmDetails={filmDetails} />
-        <MovieAddictionalInfo location={location} movieId={movieId} />
+        <MovieDescription
+          filmDetails={filmDetails}
+          location={location}
+          movieId={movieId}
+        />
+        {/* <MovieAddictionalInfo location={location} movieId={movieId} /> */}
       </Container>
     </main>
   );

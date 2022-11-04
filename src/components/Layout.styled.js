@@ -3,22 +3,24 @@ import { NavLink } from 'react-router-dom';
 
 export const Header = styled.header`
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #121212;
   padding: 20px 10px;
 `;
 
 export const HeaderLink = styled(NavLink)`
   float: left;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
   font-size: 18px;
   line-height: 25px;
   border-radius: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 15px;
 
   &.active {
-    background-color: dodgerblue;
+    background-color: #e5a00c;
     color: white;
   }
 
