@@ -4,6 +4,7 @@ import {
   FilmDescriptionWrapper,
   FilmGener,
 } from 'pages/MovieDetails.styled';
+import MoviePoster from './MoviePoster';
 
 const MovieDescription = ({ filmDetails }) => {
   const { poster_path, original_title, vote_average, overview, genres } =
@@ -12,15 +13,14 @@ const MovieDescription = ({ filmDetails }) => {
 
   return (
     <FilmDescriptionWrapper>
-      <img
-        width="300"
-        height="450"
+      <MoviePoster
         src={
           poster_path
             ? `https://image.tmdb.org/t/p/w500/${poster_path}`
             : 'https://via.placeholder.com/300x450'
         }
-        alt=""
+        width="300"
+        height="450"
       />
       <div style={{ maxWidth: '700px' }}>
         <FilmTitle>{original_title}</FilmTitle>

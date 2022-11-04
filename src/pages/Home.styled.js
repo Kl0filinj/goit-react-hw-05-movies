@@ -10,7 +10,7 @@ export const FilmList = styled.ul`
 
 export const FilmWraper = styled.li`
   display: flex;
-  flex-basis: calc(100% / 5);
+  flex-basis: calc(100% / 6);
   padding: 15px 0;
 `;
 
@@ -22,7 +22,13 @@ export const FilmCard = styled(NavLink)`
   font-weight: 600;
   color: #212121;
   height: 100%;
-  box-shadow: 0px 1px 3px rgb(0 0 0 / 12%), 0px 1px 1px rgb(0 0 0 / 14%),
-    0px 2px 1px rgb(0 0 0 / 20%);
-  border-radius: 0px 0px 4px 4px;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+  border-radius: 0.25rem;
+`;
+
+export const FilmPoster = styled.img`
+  border-radius: 0.25rem;
+  &:hover {
+    outline: 1px solid #fff;
+  }
 `;

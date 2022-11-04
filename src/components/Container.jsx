@@ -4,9 +4,10 @@ const Container = ({ children }) => {
   return (
     <div
       style={{
-        maxWidth: '100vw',
-        padding: '15px',
-        backgroundColor: '#2c2c2c',
+        position: 'relative',
+        flexShrink: 0,
+        overflow: 'hidden',
+        padding: '3rem',
       }}
     >
       {children}
