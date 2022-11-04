@@ -1,5 +1,5 @@
 import Container from 'components/Container';
-import MovieAddictionalInfo from 'components/MovieAddictionalInfo';
+// import MovieAddictionalInfo from 'components/MovieAddictionalInfo';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { getFilmById } from 'services/api';
