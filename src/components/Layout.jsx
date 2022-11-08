@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
 import Button from './Button';
+
 // import { HeaderLink } from './NavLink.styled';
 // import { Header, HeaderLink } from './Layout.styled';
 
@@ -16,7 +17,7 @@ const Layout = () => {
           <NavLink to="movies">Movies</NavLink>
         </Button>
       </Flex>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={null}>
         <Outlet />
       </Suspense>
     </>

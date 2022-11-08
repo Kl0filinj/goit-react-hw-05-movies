@@ -1,5 +1,5 @@
 import { Box, FormControl, Input, Heading } from '@chakra-ui/react';
-
+import { Blocks } from 'react-loader-spinner';
 import Container from 'components/Container';
 import MainFilmList from 'components/MainFilmList';
 import PageTitle from 'components/PageTitle';
@@ -14,6 +14,8 @@ const Movies = props => {
   const [searchedFilms, setsearchedFilms] = useState([]);
   const [filmQuery, setfilmQuery] = useState('');
   const [isEmpty, setIsEmpty] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const filmTitle = serchParams.get('title') ?? '';
 
   const onFilterChanged = evt => {
@@ -28,12 +30,15 @@ const Movies = props => {
       return;
     }
     async function getMoviesByTitle() {
+      setIsLoading(true);
       setIsEmpty(null);
       const films = await getFilsByTitle(filmTitle);
       if (films.results.length === 0) {
         setIsEmpty(true);
+        setIsLoading(false);
         return;
       }
+      setIsLoading(false);
       setsearchedFilms(films.results);
     }
     getMoviesByTitle();
@@ -62,11 +67,25 @@ const Movies = props => {
             Nothing was found for your request, try again
           </Heading>
         ) : (
-          <MainFilmList
-            movieList={searchedFilms}
-            location={location}
-            page={'movies'}
-          />
+          <>
+            {' '}
+            {isLoading && (
+              <Box display="flex" justifyContent="center">
+                <Blocks
+                  visible={true}
+                  height="150"
+                  width="150"
+                  ariaLabel="blocks-loading"
+                  wrapperClass="blocks-wrapper"
+                />
+              </Box>
+            )}
+            <MainFilmList
+              movieList={searchedFilms}
+              location={location}
+              page={'movies'}
+            />
+          </>
         )}
       </Container>
     </main>

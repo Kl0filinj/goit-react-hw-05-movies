@@ -9,48 +9,60 @@ import Button from 'components/Button';
 
 const MovieDetails = props => {
   const [filmDetails, setfilmDetails] = useState(null);
-  // const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const { movieId } = useParams();
   const backLink = location.state?.from ?? '/goit-react-hw-05-movies';
 
   useEffect(() => {
     async function getFilmDetails() {
-      // setError(false);
+      setIsLoading(true);
       const film = await getFilmById(movieId);
       console.log(film.response?.status);
       if (film.response?.status !== undefined) {
         console.log('Error');
+        setIsLoading(false);
       } else {
         setfilmDetails(film);
+        setIsLoading(false);
       }
     }
     getFilmDetails();
   }, [movieId]);
 
-  if (filmDetails === null) {
-    return (
-      <main>
-        <Container>
-          <PageTitle>Film not found, try again please</PageTitle>
-        </Container>
-      </main>
-    );
-  }
+  // if (filmDetails === null) {
+  //   return (
+  //     <main>
+  //       <Container>
+  //         <PageTitle>Film not found, try again please</PageTitle>
+  //       </Container>
+  //     </main>
+  //   );
+  // }
 
   return (
-    <main>
-      <Container>
-        <Button>
-          <NavLink to={backLink}>Go Back</NavLink>
-        </Button>
-        <MovieDescription
-          filmDetails={filmDetails}
-          location={location}
-          movieId={movieId}
-        />
-      </Container>
-    </main>
+    <>
+      {!isLoading && (
+        <main>
+          {filmDetails !== null ? (
+            <Container>
+              <Button>
+                <NavLink to={backLink}>Go Back</NavLink>
+              </Button>
+              <MovieDescription
+                filmDetails={filmDetails}
+                location={location}
+                movieId={movieId}
+              />
+            </Container>
+          ) : (
+            <Container>
+              <PageTitle>Film not found, try again please</PageTitle>
+            </Container>
+          )}
+        </main>
+      )}
+    </>
   );
 };
 
