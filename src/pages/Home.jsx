@@ -18,7 +18,7 @@ const Home = props => {
 
   return (
     <main>
-      <PageTitle>Popular Films ⬇️</PageTitle>
+      <PageTitle>Popular Films</PageTitle>
       <Container>
         <MainFilmList movieList={filmList} location={location} page={'home'} />
       </Container>

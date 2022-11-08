@@ -1,16 +1,21 @@
 import React, { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
-import { Header, HeaderLink } from './Layout.styled';
+import { Outlet, NavLink } from 'react-router-dom';
+import { Flex } from '@chakra-ui/react';
+import Button from './Button';
+// import { HeaderLink } from './NavLink.styled';
+// import { Header, HeaderLink } from './Layout.styled';
 
 const Layout = () => {
   return (
     <>
-      <Header>
-        <HeaderLink to="/goit-react-hw-05-movies" end>
-          Home
-        </HeaderLink>
-        <HeaderLink to="movies">Movies</HeaderLink>
-      </Header>
+      <Flex as="header" bg="blackAlpha.900" color="#262626" py="6" px="14">
+        <Button>
+          <NavLink to="/goit-react-hw-05-movies">Home</NavLink>
+        </Button>
+        <Button margin={5}>
+          <NavLink to="movies">Movies</NavLink>
+        </Button>
+      </Flex>
       <Suspense fallback={<h1>Loading...</h1>}>
         <Outlet />
       </Suspense>

@@ -1,13 +1,16 @@
-import { FilmList } from 'pages/Home.styled';
+// import { FilmList } from 'pages/Home.styled';
+import MoviePoster from './MoviePoster';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getFilmCast } from 'services/api';
-import { ActorPreview, ActorWrapper } from './Cast.styled';
+import { Wrap, WrapItem, Center, Text, Box, Heading } from '@chakra-ui/react';
+// import { ActorPreview, ActorWrapper } from './Cast.styled';
 
 const Cast = props => {
   const [castList, setcastList] = useState([]);
   const location = useLocation();
   const movieId = location.state.movieId;
+
   useEffect(() => {
     async function getFilmCastInfo() {
       const cast = await getFilmCast(movieId);
@@ -15,30 +18,47 @@ const Cast = props => {
     }
     getFilmCastInfo();
   }, [movieId]);
+
   return (
-    <section>
-      <div>
-        <h2>Cast of </h2>
-        <FilmList>
+    <Box as="section" mt="7">
+      <Box bgColor="gray.700" p="8" borderRadius="sm">
+        <Heading as="h2" fontSize="2xl" mb="3">
+          Cast
+        </Heading>
+        <Wrap spacing="4" justify="center" pt="1">
           {castList.map(({ id, profile_path, name, character }) => (
-            <ActorWrapper key={id}>
-              <ActorPreview
+            <WrapItem key={id} flexDirection="column">
+              <MoviePoster
                 src={
                   profile_path
                     ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                    : 'https://via.placeholder.com/200x100'
+                    : 'https://via.placeholder.com/200x300'
                 }
-                alt=""
-                width="140"
-                height="140"
+                height="300px"
+                width="200px"
               />
-              {/* <p>{name}</p>
-              <p>Character: {character}</p> */}
-            </ActorWrapper>
+              <Center
+                bgColor="black"
+                w="100%"
+                maxW="200px"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                flexGrow="1"
+                borderBottomRadius="base"
+              >
+                <Text as="span" textAlign="center">
+                  {name}
+                </Text>
+                <hr width="70%" />
+                <Text as="span">{character}</Text>
+              </Center>
+            </WrapItem>
           ))}
-        </FilmList>
-      </div>
-    </section>
+        </Wrap>
+      </Box>
+    </Box>
   );
 };
 

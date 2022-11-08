@@ -1,14 +1,24 @@
 import PropTypes from 'prop-types';
-import {
-  FilmTitle,
-  FilmDescriptionWrapper,
-  FilmGener,
-} from 'pages/MovieDetails.styled';
+// import {
+//   FilmTitle,
+//   FilmDescriptionWrapper,
+//   FilmGener,
+// } from 'pages/MovieDetails.styled';
 import MoviePoster from './MoviePoster';
+
+// import {
+//   DescriptionCategory,
+//   DescriptionWrapper,
+// } from './MovieDescription.styled';
 import {
-  DescriptionCategory,
-  DescriptionWrapper,
-} from './MovieDescription.styled';
+  Wrap,
+  WrapItem,
+  Heading,
+  CircularProgress,
+  CircularProgressLabel,
+  Text,
+} from '@chakra-ui/react';
+
 import MovieAddictionalInfo from './MovieAddictionalInfo';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
@@ -20,48 +30,90 @@ const MovieDescription = ({ filmDetails, location, movieId }) => {
 
   return (
     <>
-      {' '}
-      <FilmDescriptionWrapper>
-        <MoviePoster
-          src={
-            poster_path
-              ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-              : 'https://via.placeholder.com/300x450'
-          }
-          width="300"
-          height="450"
-        />
-
-        <DescriptionWrapper>
-          <DescriptionCategory>
-            <FilmTitle>{original_title}</FilmTitle>
-          </DescriptionCategory>
-          <DescriptionCategory>
-            <h2>User Rate</h2>
-            <p>{` ${voteAveragePercent}%`}</p>
-          </DescriptionCategory>
-          <DescriptionCategory>
-            <h2>Overview</h2>
+      <Wrap
+        color="white"
+        spacing="16"
+        bgColor="gray.700"
+        p="8"
+        borderRadius="sm"
+      >
+        <WrapItem>
+          <MoviePoster
+            src={
+              poster_path
+                ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                : 'https://via.placeholder.com/300x450'
+            }
+            width="300"
+            height="450"
+          />
+        </WrapItem>
+        <WrapItem
+          maxW="600px"
+          justifyContent="space-around"
+          flexDirection="column"
+        >
+          <div>
+            <Heading as="h1" fontSize="4xl">
+              {original_title}
+            </Heading>
+          </div>
+          <div>
+            <Heading as="h2" fontSize="2xl" mb="3">
+              User Rate
+            </Heading>
+            {/* <p>{` ${voteAveragePercent}%`}</p> */}
+            <CircularProgress
+              value={voteAveragePercent}
+              size="80px"
+              color="green.400"
+            >
+              <CircularProgressLabel>{` ${voteAveragePercent}%`}</CircularProgressLabel>
+            </CircularProgress>
+          </div>
+          <div>
+            <Heading as="h2" fontSize="2xl" mb="3">
+              Overview
+            </Heading>
             <p>{overview}</p>
-          </DescriptionCategory>
-          <DescriptionCategory>
-            <h2>Geners</h2>
-            <ul style={{ display: 'flex' }}>
+          </div>
+          <div>
+            <Heading as="h2" fontSize="2xl" mb="3">
+              Geners
+            </Heading>
+            <Wrap>
               {genres.map(({ id, name }) => (
-                <FilmGener key={id}>{name}</FilmGener>
+                <WrapItem
+                  key={id}
+                  sx={{
+                    '&:not(:first-of-type)': {
+                      marginLeft: '10px',
+                    },
+                  }}
+                >
+                  <Text
+                    as="span"
+                    p="1"
+                    borderColor="white"
+                    borderWidth="2px"
+                    borderRadius="3"
+                  >
+                    {name}
+                  </Text>
+                </WrapItem>
               ))}
-            </ul>
-          </DescriptionCategory>
-          <DescriptionCategory>
+            </Wrap>
+          </div>
+          <div>
             <MovieAddictionalInfo location={location} movieId={movieId} />
-          </DescriptionCategory>
-        </DescriptionWrapper>
-      </FilmDescriptionWrapper>
-      <FilmDescriptionWrapper>
+          </div>
+        </WrapItem>
+      </Wrap>
+      <div>
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>
-      </FilmDescriptionWrapper>
+      </div>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getFilmReview } from 'services/api';
+import { Box, Heading } from '@chakra-ui/react';
 
 const Reviews = () => {
   const [reviewList, setreviewList] = useState([]);
@@ -15,8 +16,8 @@ const Reviews = () => {
     getFilmReviewInfo();
   }, [movieId]);
   return (
-    <section>
-      <div>
+    <Box as="section" mt="7">
+      <Box bgColor="gray.700" p="8" borderRadius="sm">
         {reviewList.length !== 0 ? (
           <ul>
             {reviewList.map(({ id, author, content }) => (
@@ -30,10 +31,12 @@ const Reviews = () => {
             ))}
           </ul>
         ) : (
-          <p>No reviews here ^_^</p>
+          <Heading as="h2" fontSize="2xl">
+            No reviews here ^_^
+          </Heading>
         )}
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 };
 

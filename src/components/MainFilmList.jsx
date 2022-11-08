@@ -1,15 +1,25 @@
 import React from 'react';
-import { FilmList, FilmCard, FilmWraper } from 'pages/Home.styled';
+// import { FilmList, FilmCard, FilmWraper } from 'pages/Home.styled';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MoviePoster from './MoviePoster';
+import { Wrap, WrapItem } from '@chakra-ui/react';
 
 const MainFilmList = ({ movieList, location, page }) => {
   const currentPage = page === 'home' ? 'movies/' : '';
   return (
-    <FilmList>
+    <Wrap spacing="4" justify="center" pt="1">
       {movieList.map(({ id, poster_path }) => (
-        <FilmWraper key={id}>
-          <FilmCard to={`${currentPage}${id}`} state={{ from: location }}>
+        <WrapItem
+          key={id}
+          sx={{
+            '&:hover ': {
+              outline: 'solid white 1px',
+              transition: 'outline 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+            },
+          }}
+        >
+          <NavLink to={`${currentPage}${id}`} state={{ from: location }}>
             <MoviePoster
               src={
                 poster_path
@@ -19,10 +29,10 @@ const MainFilmList = ({ movieList, location, page }) => {
               height="300"
               width="200"
             />
-          </FilmCard>
-        </FilmWraper>
+          </NavLink>
+        </WrapItem>
       ))}
-    </FilmList>
+    </Wrap>
   );
 };
 
