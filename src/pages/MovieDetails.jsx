@@ -1,8 +1,10 @@
 import Container from 'components/Container';
 // import MovieAddictionalInfo from 'components/MovieAddictionalInfo';
+import { Box } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { getFilmById } from 'services/api';
+import { Blocks } from 'react-loader-spinner';
 import PageTitle from 'components/PageTitle';
 import MovieDescription from 'components/MovieDescription';
 import Button from 'components/Button';
@@ -30,19 +32,9 @@ const MovieDetails = props => {
     getFilmDetails();
   }, [movieId]);
 
-  // if (filmDetails === null) {
-  //   return (
-  //     <main>
-  //       <Container>
-  //         <PageTitle>Film not found, try again please</PageTitle>
-  //       </Container>
-  //     </main>
-  //   );
-  // }
-
   return (
     <>
-      {!isLoading && (
+      {!isLoading ? (
         <main>
           {filmDetails !== null ? (
             <Container>
@@ -60,6 +52,18 @@ const MovieDetails = props => {
               <PageTitle>Film not found, try again please</PageTitle>
             </Container>
           )}
+        </main>
+      ) : (
+        <main>
+          <Box display="flex" justifyContent="center">
+            <Blocks
+              visible={true}
+              height="150"
+              width="150"
+              ariaLabel="blocks-loading"
+              wrapperClass="blocks-wrapper"
+            />
+          </Box>
         </main>
       )}
     </>
