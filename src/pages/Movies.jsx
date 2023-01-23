@@ -68,7 +68,6 @@ const Movies = props => {
           </Heading>
         ) : (
           <>
-            {' '}
             {isLoading && (
               <Box display="flex" justifyContent="center">
                 <Blocks

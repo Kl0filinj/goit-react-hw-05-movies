@@ -1,7 +1,12 @@
 import React from 'react';
-// import { FilmPoster } from 'pages/Home.styled';
 import { Image } from '@chakra-ui/react';
-const MoviePoster = ({ src, ...props }) => {
+
+interface MoviePosterProps {
+  src: string;
+  props: React.HTMLProps<HTMLImageElement>;
+}
+
+const MoviePoster: React.FC<MoviePosterProps> = ({ src, ...props }) => {
   return <Image src={src} alt="" borderTopRadius="base" {...props} />;
 };
 
