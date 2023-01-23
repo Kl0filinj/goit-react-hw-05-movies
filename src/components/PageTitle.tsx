@@ -1,8 +1,11 @@
 import React from 'react';
-// import { Title } from './PageTitle.styled';
 import { Heading } from '@chakra-ui/react';
 
-const PageTitle = ({ children }) => {
+interface PageTitleProps {
+  children: React.ReactNode;
+}
+
+const PageTitle: React.FC<PageTitleProps> = ({ children }) => {
   return (
     <Heading
       textAlign="center"

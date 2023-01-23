@@ -1,26 +1,36 @@
 import Container from 'components/Container';
-// import MovieAddictionalInfo from 'components/MovieAddictionalInfo';
 import { Box } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { getFilmById } from 'services/api';
 import { Blocks } from 'react-loader-spinner';
 import PageTitle from 'components/PageTitle';
+// @ts-ignore
 import MovieDescription from 'components/MovieDescription';
+// @ts-ignore
 import Button from 'components/Button';
 
-const MovieDetails = props => {
+type MovieIdParams = {
+  movieId: string;
+};
+
+// interface MovieLocation {
+//   location: ILocation;
+// }
+
+const MovieDetails: React.FC = props => {
   const [filmDetails, setfilmDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
-  const { movieId } = useParams();
+  const { movieId } = useParams<MovieIdParams>();
   const backLink = location.state?.from ?? '/goit-react-hw-05-movies';
+
+  // console.log(typeof movieId);
 
   useEffect(() => {
     async function getFilmDetails() {
       setIsLoading(true);
-      const film = await getFilmById(movieId);
-      console.log(film.response?.status);
+      const film = await getFilmById(movieId!);
       if (film.response?.status !== undefined) {
         console.log('Error');
         setIsLoading(false);

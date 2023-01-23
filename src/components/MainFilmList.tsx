@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // import PropTypes from 'prop-types';
+import { ILocation } from 'interfaces/reactApiInterfaces';
 import MoviePoster from './MoviePoster';
 import { Wrap, WrapItem } from '@chakra-ui/react';
 
-interface ISingleFilm {
+export interface ISingleFilm {
   adult: boolean;
   backdrop_path: string;
   first_air_date: string;
@@ -20,14 +21,6 @@ interface ISingleFilm {
   poster_path: string | null;
   vote_average: number;
   vote_count: number;
-}
-
-interface ILocation {
-  hash: string;
-  key: string;
-  pathname: string;
-  search: string;
-  state: null | ILocation;
 }
 
 interface MainFilmListProps {
