@@ -1,24 +1,24 @@
-import { Box, FormControl, Input, Heading } from '@chakra-ui/react';
+import { Box, FormControl, Input, Heading, Button } from '@chakra-ui/react';
 import { Blocks } from 'react-loader-spinner';
-import Container from 'components/Container';
-import MainFilmList from 'components/MainFilmList';
-import PageTitle from 'components/PageTitle';
-import Button from 'components/Button';
-import { useState, useEffect } from 'react';
+import Container from 'components/UtilComponents/Container';
+import MainFilmList from 'components/UtilComponents/MainFilmList';
+import PageTitle from 'components/UtilComponents/PageTitle';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { getFilsByTitle } from 'services/api';
-const Movies = props => {
+
+const Movies: React.FC = props => {
   const location = useLocation();
 
   const [serchParams, setserchParams] = useSearchParams();
   const [searchedFilms, setsearchedFilms] = useState([]);
   const [filmQuery, setfilmQuery] = useState('');
-  const [isEmpty, setIsEmpty] = useState(null);
+  const [isEmpty, setIsEmpty] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const filmTitle = serchParams.get('title') ?? '';
 
-  const onFilterChanged = evt => {
+  const onFilterChanged = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (filmQuery === filmTitle) {
       return alert('Enter new movie Title ^_^');
@@ -31,7 +31,7 @@ const Movies = props => {
     }
     async function getMoviesByTitle() {
       setIsLoading(true);
-      setIsEmpty(null);
+      setIsEmpty(false);
       const films = await getFilsByTitle(filmTitle);
       if (films.results.length === 0) {
         setIsEmpty(true);
@@ -44,6 +44,7 @@ const Movies = props => {
     getMoviesByTitle();
     setfilmQuery(filmTitle);
   }, [filmTitle]);
+
   return (
     <main>
       <PageTitle>Search Movies ⬇️</PageTitle>

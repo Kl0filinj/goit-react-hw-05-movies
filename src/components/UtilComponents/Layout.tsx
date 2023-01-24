@@ -3,10 +3,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
 import Button from './Button';
 
-// import { HeaderLink } from './NavLink.styled';
-// import { Header, HeaderLink } from './Layout.styled';
-
-const Layout = () => {
+const Layout: React.FC = () => {
   return (
     <>
       <Flex as="header" bg="blackAlpha.900" color="#262626" py="6" px="14">

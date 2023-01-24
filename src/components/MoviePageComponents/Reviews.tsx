@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { getFilmReview } from 'services/api';
 import { Box, Heading } from '@chakra-ui/react';
 
-const Reviews = () => {
+const Reviews: React.FC = props => {
   const [reviewList, setreviewList] = useState([]);
   const location = useLocation();
   const movieId = location.state.movieId;

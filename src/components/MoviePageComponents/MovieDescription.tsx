@@ -1,15 +1,4 @@
-import PropTypes from 'prop-types';
-// import {
-//   FilmTitle,
-//   FilmDescriptionWrapper,
-//   FilmGener,
-// } from 'pages/MovieDetails.styled';
-import MoviePoster from './MoviePoster';
-
-// import {
-//   DescriptionCategory,
-//   DescriptionWrapper,
-// } from './MovieDescription.styled';
+import MoviePoster from '../UtilComponents/MoviePoster';
 import {
   Wrap,
   WrapItem,
@@ -18,14 +7,22 @@ import {
   CircularProgressLabel,
   Text,
 } from '@chakra-ui/react';
-
 import MovieAddictionalInfo from './MovieAddictionalInfo';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { ILocation, ISingleFilm } from 'interfaces/reactApiInterfaces';
 
-const MovieDescription = ({ filmDetails, location, movieId }) => {
-  const { poster_path, original_title, vote_average, overview, genres } =
-    filmDetails;
+interface MovieDescriptionProps {
+  filmDetails: ISingleFilm;
+  location: ILocation;
+  movieId: string | undefined;
+}
+
+const MovieDescription: React.FC<MovieDescriptionProps> = ({
+  filmDetails: { poster_path, original_title, vote_average, overview, genres },
+  location,
+  movieId,
+}) => {
   const voteAveragePercent = Math.floor(Number(vote_average) * 10);
 
   return (
@@ -44,6 +41,7 @@ const MovieDescription = ({ filmDetails, location, movieId }) => {
                 ? `https://image.tmdb.org/t/p/w500/${poster_path}`
                 : 'https://via.placeholder.com/300x450'
             }
+            // @ts-ignore
             width="300"
             height="450"
           />
@@ -62,7 +60,6 @@ const MovieDescription = ({ filmDetails, location, movieId }) => {
             <Heading as="h2" fontSize="2xl" mb="3">
               User Rate
             </Heading>
-            {/* <p>{` ${voteAveragePercent}%`}</p> */}
             <CircularProgress
               value={voteAveragePercent}
               size="80px"
@@ -82,7 +79,7 @@ const MovieDescription = ({ filmDetails, location, movieId }) => {
               Geners
             </Heading>
             <Wrap>
-              {genres.map(({ id, name }) => (
+              {genres!.map(({ id, name }) => (
                 <WrapItem
                   key={id}
                   sx={{
@@ -116,10 +113,6 @@ const MovieDescription = ({ filmDetails, location, movieId }) => {
       </div>
     </>
   );
-};
-
-MovieDescription.propTypes = {
-  filmDetails: PropTypes.object.isRequired,
 };
 
 export default MovieDescription;

@@ -1,10 +1,19 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Wrap, WrapItem, Heading } from '@chakra-ui/react';
-import Button from './Button';
-// import { HeaderLink } from './Layout.styled';
+import Button from '../UtilComponents/Button';
+import { ILocation } from 'interfaces/reactApiInterfaces';
+import React from 'react';
 
-const MovieAddictionalInfo = ({ location, movieId }) => {
+interface MovieAddictionalInfoProps {
+  location: ILocation;
+  movieId: string | undefined;
+}
+
+const MovieAddictionalInfo: React.FC<MovieAddictionalInfoProps> = ({
+  location,
+  movieId,
+}) => {
   return (
     <>
       <Heading as="h1" fontSize="2xl" mb="3">
@@ -34,11 +43,6 @@ const MovieAddictionalInfo = ({ location, movieId }) => {
       </Wrap>
     </>
   );
-};
-
-MovieAddictionalInfo.propTypes = {
-  movieId: PropTypes.string.isRequired,
-  location: PropTypes.object.isRequired,
 };
 
 export default MovieAddictionalInfo;

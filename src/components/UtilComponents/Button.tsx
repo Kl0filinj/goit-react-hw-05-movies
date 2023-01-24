@@ -1,7 +1,14 @@
 import React from 'react';
 import { Button } from '@chakra-ui/react';
 
-const ButtonSample = ({
+interface ButtonSampleProps {
+  children: React.ReactNode;
+  margin?: number | string;
+  variant?: string;
+  props?: React.HTMLProps<HTMLButtonElement>;
+}
+
+const ButtonSample: React.FC<ButtonSampleProps> = ({
   children,
   margin = 0,
   variant = 'outline',

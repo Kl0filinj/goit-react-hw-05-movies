@@ -1,22 +1,16 @@
-import Container from 'components/Container';
+import Container from 'components/UtilComponents/Container';
 import { Box } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { getFilmById } from 'services/api';
 import { Blocks } from 'react-loader-spinner';
-import PageTitle from 'components/PageTitle';
-// @ts-ignore
-import MovieDescription from 'components/MovieDescription';
-// @ts-ignore
-import Button from 'components/Button';
+import PageTitle from 'components/UtilComponents/PageTitle';
+import MovieDescription from 'components/MoviePageComponents/MovieDescription';
+import Button from 'components/UtilComponents/Button';
 
 type MovieIdParams = {
   movieId: string;
 };
-
-// interface MovieLocation {
-//   location: ILocation;
-// }
 
 const MovieDetails: React.FC = props => {
   const [filmDetails, setfilmDetails] = useState(null);
@@ -24,8 +18,6 @@ const MovieDetails: React.FC = props => {
   const location = useLocation();
   const { movieId } = useParams<MovieIdParams>();
   const backLink = location.state?.from ?? '/goit-react-hw-05-movies';
-
-  // console.log(typeof movieId);
 
   useEffect(() => {
     async function getFilmDetails() {

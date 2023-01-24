@@ -1,12 +1,10 @@
-// import { FilmList } from 'pages/Home.styled';
-import MoviePoster from './MoviePoster';
-import { useState, useEffect } from 'react';
+import MoviePoster from '../UtilComponents/MoviePoster';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getFilmCast } from 'services/api';
 import { Wrap, WrapItem, Center, Text, Box, Heading } from '@chakra-ui/react';
-// import { ActorPreview, ActorWrapper } from './Cast.styled';
 
-const Cast = props => {
+const Cast: React.FC = props => {
   const [castList, setcastList] = useState([]);
   const location = useLocation();
   const movieId = location.state.movieId;
@@ -34,6 +32,7 @@ const Cast = props => {
                     ? `https://image.tmdb.org/t/p/w500/${profile_path}`
                     : 'https://via.placeholder.com/200x300'
                 }
+                // @ts-ignore
                 height="300px"
                 width="200px"
               />
@@ -51,7 +50,7 @@ const Cast = props => {
                 <Text as="span" textAlign="center">
                   {name}
                 </Text>
-                <hr width="70%" />
+                <hr style={{ width: '70%' }} />
                 <Text as="span">{character}</Text>
               </Center>
             </WrapItem>

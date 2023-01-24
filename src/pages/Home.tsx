@@ -1,7 +1,7 @@
 import React from 'react';
-import Container from 'components/Container';
-import MainFilmList from 'components/MainFilmList';
-import PageTitle from 'components/PageTitle';
+import Container from 'components/UtilComponents/Container';
+import MainFilmList from 'components/UtilComponents/MainFilmList';
+import PageTitle from 'components/UtilComponents/PageTitle';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getTrendingFilms } from 'services/api';
@@ -12,6 +12,8 @@ const Home: React.FC = props => {
   const [filmList, setfilmList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+
+  console.log(filmList);
 
   useEffect(() => {
     async function getTrendFilms() {

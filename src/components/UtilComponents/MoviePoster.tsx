@@ -7,7 +7,7 @@ interface MoviePosterProps {
 }
 
 const MoviePoster: React.FC<MoviePosterProps> = ({ src, ...props }) => {
-  return <Image src={src} alt="" borderTopRadius="base" {...props} />;
+  return <Image as="img" src={src} alt="" borderTopRadius="base" {...props} />;
 };
 
 export default MoviePoster;
